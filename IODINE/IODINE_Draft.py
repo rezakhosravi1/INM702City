@@ -298,7 +298,9 @@ class VAE(tfk.Model):
                 z_mean, z_log_var, z = self.refinement([original_image,
                                                         likelihood,
                                                         mus,
+                                                        mus_gradient_layer_normalized
                                                         masks,
+                                                        masks_gradient_layer_normalized
                                                         masks_logits,
                                                         x_coordinate,
                                                         y_coordinate,
