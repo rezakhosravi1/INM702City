@@ -279,7 +279,8 @@ class VAE(tfk.Model):
 
         likelihood = self.layer_normalization_likelihood(likelihood)
         posterior_gradient = tape.gradient(loss, posterior)
-        posterior_gradient_clipped_layer_normalized = self.layer_normalization_posterior_gradient(posterior_gradient)
+        posterior_gradient_clipped = tf.clip_by_norm(posterior_gradient , 1.0)
+        posterior_gradient_clipped_layer_normalized = self.layer_normalization_posterior_gradient(posterior_gradient_clipped)
         mus_gradient = tape.gradient(loss, mus)
         mus_gradient_layer_normalized = self.layer_normalization_mus_gradient(mus_gradient)
         masks_gradient = tape.gradient(loss, masks)
@@ -337,7 +338,8 @@ class VAE(tfk.Model):
             
             likelihood = self.layer_normalization_likelihood(likelihood)
             posterior_gradient = tape.gradient(loss, posterior)
-            posterior_gradient_clipped_layer_normalized = self.layer_normalization_posterior_gradient(posterior_gradient)
+            posterior_gradient_clipped = tf.clip_by_norm(posterior_gradient , 1.0)
+            posterior_gradient_clipped_layer_normalized = self.layer_normalization_posterior_gradient(posterior_gradient_clipped)
             mus_gradient = tape.gradient(loss, mus)
             mus_gradient_layer_normalized = self.layer_normalization_mus_gradient(mus_gradient)
             masks_gradient = tape.gradient(loss, masks)
